@@ -5,7 +5,9 @@ import TabButtons from "./components/TabButtons.jsx";
 import { CORE_CONCEPTS } from "./data.js";
 
 function App() {
-  function handleSelect() {}
+  function handleSelect(selectedButton) {
+    //selectedButton => 'Component', 'JSX', 'Props', 'State'
+  }
 
   return (
     <div>
@@ -23,10 +25,16 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButtons onSelect={handleSelect}>Components</TabButtons>
-            <TabButtons onSelect={handleSelect}>JSX</TabButtons>
-            <TabButtons onSelect={handleSelect}>Props</TabButtons>
-            <TabButtons onSelect={handleSelect}>State</TabButtons>
+            <TabButtons onSelect={() => handleSelect("component")}>
+              Components
+            </TabButtons>
+            <TabButtons onSelect={() => handleSelect("jsx")}>JSX</TabButtons>
+            <TabButtons onSelect={() => handleSelect("props")}>
+              Props
+            </TabButtons>
+            <TabButtons onSelect={() => handleSelect("state")}>
+              State
+            </TabButtons>
           </menu>
           Dynamic Content
         </section>
