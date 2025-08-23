@@ -4,9 +4,10 @@ import Header from "./components/Header.jsx";
 import CoreConcept from "./components/CoreConcept.jsx";
 import TabButtons from "./components/TabButtons.jsx";
 import { CORE_CONCEPTS } from "./data.js";
+import { EXAMPLES } from "./data.js";
 
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState("Please click a button");
+  const [selectedTopic, setSelectedTopic] = useState("components");
 
   function handleSelect(selectedButton) {
     //selectedButton => 'Component', 'JSX', 'Props', 'State'
@@ -40,7 +41,13 @@ function App() {
               State
             </TabButtons>
           </menu>
-          {selectedTopic}
+          <div id="tab-content">
+            <h3>{EXAMPLES[selectedTopic].title}</h3>
+            <p>{EXAMPLES[selectedTopic].description}</p>
+            <pre>
+              <code>{EXAMPLES[selectedTopic].code}</code>
+            </pre>
+          </div>
         </section>
       </main>
     </div>
