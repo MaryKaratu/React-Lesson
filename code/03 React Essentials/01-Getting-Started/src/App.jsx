@@ -29,14 +29,14 @@ function App() {
   }
 
   return (
-    <div>
+    <>
       <Header />
       <main>
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
             {CORE_CONCEPTS.map((conceptItems) => (
-              <CoreConcept {...conceptItems} />
+              <CoreConcept key={conceptItems.title} {...conceptItems} />
             ))}
           </ul>
         </section>
@@ -71,7 +71,7 @@ function App() {
           {tabContent}
         </section>
       </main>
-    </div>
+    </>
   );
 }
 
