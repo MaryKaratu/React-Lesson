@@ -1,22 +1,6 @@
 import { useState } from "react";
 
-export default function UserInput() {
-  const [UserInput, setUserInput] = useState({
-    initialInvestment: 12000,
-    annualInvestment: 2000,
-    expectedReturn: 4,
-    Duration: 8,
-  });
-
-  function handleChange(userInputValue, newValue) {
-    setUserInput((prevInput) => {
-      return {
-        ...prevInput,
-        [userInputValue]: newValue,
-      };
-    });
-  }
-
+export default function UserInput({ handleChange, userInput }) {
   return (
     <div id="user-input">
       <div className="input-group">
@@ -24,8 +8,8 @@ export default function UserInput() {
           <label>Initial Investment</label>
           <input
             type="number"
-            onChange={(e) => handleChange("initalIvestment", e.target.value)}
-            value={UserInput}
+            value={userInput.initialInvestment}
+            onChange={(e) => handleChange("initialInvestment", e.target.value)}
             required
           />
         </p>
@@ -33,8 +17,8 @@ export default function UserInput() {
           <label>Annual InvestmentT</label>
           <input
             type="number"
-            onChange={(e) => handleChange("annuallIvestment", e.target.value)}
-            value={UserInput}
+            value={userInput.annualInvestment}
+            onChange={(e) => handleChange("annualInvestment", e.target.value)}
             required
           />
         </p>
@@ -44,8 +28,8 @@ export default function UserInput() {
           <label>Expected Return</label>
           <input
             type="number"
+            value={userInput.expectedReturn}
             onChange={(e) => handleChange("expectedReturn", e.target.value)}
-            value={UserInput}
             required
           />
         </p>
@@ -53,8 +37,8 @@ export default function UserInput() {
           <label>Duration</label>
           <input
             type="number"
+            value={userInput.duration}
             onChange={(e) => handleChange("duration", e.target.value)}
-            value={UserInput}
             required
           />
         </p>
