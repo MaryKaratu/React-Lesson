@@ -11,8 +11,11 @@ export default function TimerChallenge({ title, targetTime }) {
 
   if (timerRemaining <= 0) {
     clearInterval(timer.current);
-    setTimerRemaining(targetTime * 1000);
     dailog.current.open();
+  }
+
+  function hnadleReset() {
+    setTimerRemaining(targetTime * 1000);
   }
 
   function handleStart() {
@@ -28,7 +31,12 @@ export default function TimerChallenge({ title, targetTime }) {
 
   return (
     <>
-      <ResultModal ref={dailog} targetTime={targetTime} result="lost" />
+      <ResultModal
+        ref={dailog}
+        targetTime={targetTime}
+        remainingTime={timerRemaining}
+        onReset={hnadleReset}
+      />
 
       <section className="challenge">
         <h2>{title}</h2>
