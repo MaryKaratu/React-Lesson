@@ -4,20 +4,26 @@ import ResultModal from "./ResultModal";
 export default function TimerChallenge({ title, targetTime }) {
   const timer = useRef();
   const dailog = useRef();
-  const [timerStarted, setTimerStarted] = useState(false);
-  const [timerExpired, setTimerExpired] = useState(false);
+  const [timerRemaining, setTimerRemaining] = useState(targetTime * 1000);
+
+  const timerIsActive =
+    timerRemaining > 0 && timerRemaining < targetTime * 1000;
+
+  if (timerRemaining <= 0) {
+    clearInterval(timer.current);
+    setTimerRemaining(targetTime * 1000);
+    dailog.current.open();
+  }
 
   function handleStart() {
-    timer.current = setTimeout(() => {
-      setTimerExpired(true);
-      dailog.current.open();
-    }, targetTime * 1000);
-
-    setTimerStarted(true);
+    timer.current = setInterval(() => {
+      setTimerRemaining((prevTime) => prevTime - 10);
+    }, 10);
   }
 
   function handleStop() {
-    clearTimeout(timer.current);
+    dailog.current.open();
+    clearInterval(timer.current);
   }
 
   return (
@@ -31,12 +37,12 @@ export default function TimerChallenge({ title, targetTime }) {
           {targetTime} second{targetTime > 1 ? "s" : ""}
         </p>
         <p>
-          <button onClick={timerStarted ? handleStop : handleStart}>
-            {timerStarted ? "Stop" : "Start"} Challenge
+          <button onClick={timerIsActive ? handleStop : handleStart}>
+            {timerIsActive ? "Stop" : "Start"} Challenge
           </button>
         </p>
-        <p className={timerStarted ? "active" : undefined}>
-          {timerStarted ? "Time is running" : "Timer inactive"}
+        <p className={timerIsActive ? "active" : undefined}>
+          {timerIsActive ? "Time is running" : "Timer inactive"}
         </p>
       </section>
     </>
